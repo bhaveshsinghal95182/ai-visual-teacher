@@ -18,7 +18,6 @@ export function Camera() {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [facingMode, setFacingMode] = useState<'user' | 'environment'>('environment');
 
-
     const handleCapture = async (mode: 'explain_like_five' | 'step_by_step') => {
         setError('');
         const imageSrc = webcamRef.current?.getScreenshot();
@@ -52,49 +51,51 @@ export function Camera() {
                     className="w-full h-full object-contain"
                     videoConstraints={{ ...WEBCAM_CONFIG, facingMode }}
                 />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-4 flex-wrap justify-center w-full px-4">
-                    <button
-                        onClick={toggleCamera}
-                        className="inline-flex h-12 animate-shimmer items-center justify-center rounded-full border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                    >
-                        <RefreshCcw className="w-5 h-5" />
-                        Toggle Camera
-                    </button>
-                    <button
-                        onClick={() => handleCapture('explain_like_five')}
-                        disabled={isSolving}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full  items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer  justify-center  border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]  font-medium  transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                    >
-                        {isSolving ? (
-                            <>
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                                Solving...
-                            </>
-                        ) : (
-                            <>
-                                <CameraIcon className="w-5 h-5" />
-                                Explain Like 5
-                            </>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => handleCapture('step_by_step')}
-                        disabled={isSolving}
-                        className="py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer justify-center border bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2  border-slate-800 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                    >
-                        {isSolving ? (
-                            <>
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                                Solving...
-                            </>
-                        ) : (
-                            <>
-                                <CameraIcon className="w-5 h-5" />
-                                Step by Step
-                            </>
-                        )}
-                    </button>
-                </div>
+            </div>
+
+            {/* Buttons Container */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto sm:px-4 justify-center">
+                <button
+                    onClick={toggleCamera}
+                    className="inline-flex h-12 animate-shimmer items-center justify-center rounded-full border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                >
+                    <RefreshCcw className="w-5 h-5" />
+                    Toggle Camera
+                </button>
+                <button
+                    onClick={() => handleCapture('explain_like_five')}
+                    disabled={isSolving}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full  items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer  justify-center  border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]  font-medium  transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                >
+                    {isSolving ? (
+                        <>
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            Solving...
+                        </>
+                    ) : (
+                        <>
+                            <CameraIcon className="w-5 h-5" />
+                            Explain Like 5
+                        </>
+                    )}
+                </button>
+                <button
+                    onClick={() => handleCapture('step_by_step')}
+                    disabled={isSolving}
+                    className="py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer justify-center border bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2  border-slate-800 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                >
+                    {isSolving ? (
+                        <>
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            Solving...
+                        </>
+                    ) : (
+                        <>
+                            <CameraIcon className="w-5 h-5" />
+                            Step by Step
+                        </>
+                    )}
+                </button>
             </div>
 
             {error && (
@@ -104,15 +105,12 @@ export function Camera() {
             )}
 
             {solution && !error && (
-                
-                    <Solution
-                        solution={solution}
-                        isSpeaking={isSpeaking}
-                        onToggleSpeech={setIsSpeaking}
-                    />
-
+                <Solution
+                    solution={solution}
+                    isSpeaking={isSpeaking}
+                    onToggleSpeech={setIsSpeaking}
+                />
             )}
-
         </div>
     );
 }

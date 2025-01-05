@@ -61,25 +61,23 @@ export function Camera() {
 
     return (
         <div className="flex flex-col items-center gap-6 w-full max-w-4xl mx-auto">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-900 shadow-lg">
+            <div className="relative w-full h-[75vh] rounded-lg overflow-hidden bg-gray-900 shadow-lg flex-grow">
                 <Webcam
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover sm:object-contain"
                     videoConstraints={{
                         ...WEBCAM_CONFIG,
                         facingMode,
-                        width: window.innerWidth < 640 ? window.innerWidth : WEBCAM_CONFIG.width,
-                        height: window.innerWidth < 640 ? window.innerHeight / 2 : WEBCAM_CONFIG.height,
                     }}
                 />
             </div>
 
             {/* Buttons Container */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto sm:px-4 justify-center">
+            <div className="flex flex-col gap-4 w-full justify-center sm:flex-row sm:gap-6 sm:w-auto sm:px-4">
                 <button
                     onClick={toggleCamera}
-                    className="inline-flex h-12 animate-shimmer items-center justify-center rounded-full border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 >
                     <RefreshCcw className="w-5 h-5" />
                     Toggle Camera
@@ -87,7 +85,7 @@ export function Camera() {
                 <button
                     onClick={() => handleCapture('explain_like_five')}
                     disabled={isSolving}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full  items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer  justify-center  border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]  font-medium  transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 justify-center border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 >
                     {isSolving ? (
                         <>
@@ -104,7 +102,7 @@ export function Camera() {
                 <button
                     onClick={() => handleCapture('step_by_step')}
                     disabled={isSolving}
-                    className="py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 animate-shimmer justify-center border bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2  border-slate-800 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                    className="py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 justify-center border bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 border-slate-800 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 >
                     {isSolving ? (
                         <>
@@ -120,21 +118,22 @@ export function Camera() {
                 </button>
             </div>
 
-            <QueryBox onNewQuery={handleNewQuery}/>
+            <QueryBox onNewQuery={handleNewQuery} />
+            <div className="mt-6 sm:mt-0">
+                {error && (
+                    <div className="w-full bg-red-50 border border-red-200 rounded-lg p-4">
+                        <p className="text-red-600">{error}</p>
+                    </div>
+                )}
 
-            {error && (
-                <div className="w-full bg-red-50 border border-red-200 rounded-lg p-4">
-                    <p className="text-red-600">{error}</p>
-                </div>
-            )}
-
-            {solution && !error && (
-                <Solution
-                    solution={solution}
-                    isSpeaking={isSpeaking}
-                    onToggleSpeech={setIsSpeaking}
-                />
-            )}
+                {solution && !error && (
+                    <Solution
+                        solution={solution}
+                        isSpeaking={isSpeaking}
+                        onToggleSpeech={setIsSpeaking}
+                    />
+                )}
+            </div>
             <History />
         </div>
     );

@@ -36,7 +36,7 @@ export const QueryBox: React.FC<QueryBoxProps> = ({ onNewQuery }) => {
                     />
                     <button
                         type="submit"
-                        className="ml-4  py-2 rounded-full bg-blue-500 text-white"
+                        className="ml-4 px-6 py-2 rounded-full bg-blue-500 text-white"
                     >
                         Submit
                     </button>

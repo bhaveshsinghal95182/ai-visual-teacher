@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Camera as CameraIcon, Loader2, RefreshCcw } from 'lucide-react';
-import { analyzeImage, analyzePrompt } from '../services/gemini';
+import { analyzeImage } from '../services/gemini';
+import { analyzePrompt } from '../services/gemini-query';
 import { Solution } from './solution';
 import { History } from './convo-history';
 import { QueryBox } from './querybox';

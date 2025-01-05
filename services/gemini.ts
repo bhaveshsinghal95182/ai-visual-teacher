@@ -1,12 +1,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import * as dotenv from "dotenv";
 
-const apiKey = process.env.GEMINI_API_KEY ?? "";
-if (!apiKey) {
+dotenv.config();
+const somevar =
+  process.env.GEMINI_API_KEY ?? "AIzaSyBxWhvNTqMVfm2Xb4Hb9Kx5m9TqK56pSBY";
+if (!somevar) {
   throw new Error("GEMINI_API_KEY is not set in the environment variables.");
 }
 
-const genAI = new GoogleGenerativeAI(apiKey);
-
+const genAI = new GoogleGenerativeAI(somevar);
 
 export const isValidBase64Image = (imageData: string): boolean => {
   try {

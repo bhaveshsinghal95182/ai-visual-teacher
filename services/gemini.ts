@@ -10,6 +10,7 @@ if (!somevar) {
 
 const genAI = new GoogleGenerativeAI(somevar);
 
+
 export const isValidBase64Image = (imageData: string): boolean => {
   try {
     if (!imageData.startsWith("data:image/")) {

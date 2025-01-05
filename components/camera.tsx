@@ -18,7 +18,7 @@ export function Camera() {
     const [error, setError] = useState<string>('');
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [facingMode, setFacingMode] = useState<'user' | 'environment'>('environment');
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
+
 
     const handleCapture = async (mode: 'explain_like_five' | 'step_by_step') => {
         setError('');
@@ -32,7 +32,6 @@ export function Camera() {
         try {
             const result = await analyzeImage(imageSrc, mode);
             setSolution(result);
-            setIsPopupVisible(true); // Show popup when a solution is available
         } catch (err) {
             setError('Failed to analyze image. Please try again.');
             console.error(err);
@@ -43,10 +42,6 @@ export function Camera() {
 
     const toggleCamera = () => {
         setFacingMode((prevMode) => (prevMode === 'user' ? 'environment' : 'user'));
-    };
-
-    const closePopup = () => {
-        setIsPopupVisible(false);
     };
 
     return (
@@ -109,22 +104,16 @@ export function Camera() {
                 </div>
             )}
 
-            {isPopupVisible && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <BackgroundGradient className="rounded-lg shadow-lg max-w-3xl w-full p-6 overflow-y-auto max-h-[80vh] relative bg-white dark:bg-zinc-900">
-                        <button
-                            onClick={closePopup}
-                            className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-                        >
-                            ✖
-                        </button>
-                        <Solution
-                            solution={solution}
-                            isSpeaking={isSpeaking}
-                            onToggleSpeech={setIsSpeaking}
-                        />
-                    </BackgroundGradient>
-                </div>
+            {solution && !error && (
+                <BackgroundGradient className="rounded-lg shadow-lg max-w-3xl w-full p-6 overflow-y-auto max-h-[80vh] relative bg-green-50">
+
+                    <Solution
+                        solution={solution}
+                        isSpeaking={isSpeaking}
+                        onToggleSpeech={setIsSpeaking}
+                    />
+                </BackgroundGradient>
+
             )}
 
         </div>

@@ -35,7 +35,7 @@ export function Solution({
                     <h2 className="text-xl font-semibold text-slate-200">Solution:</h2>
                     <button
                         onClick={handleToggleSpeech}
-                        className="p-2 hover:bg-zinc-500 rounded-full transition-colors"
+                        className="p-2 px-6 hover:bg-zinc-500 rounded-full transition-colors"
                         aria-label={isSpeaking ? "Stop speaking" : "Start speaking"}
                     >
                         {isSpeaking ? (

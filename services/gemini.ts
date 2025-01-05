@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 const somevar =
-  process.env.GEMINI_API_KEY ?? "AIzaSyCb0lNWMqQaSSPy6SXNp60oSwSYicprETY";
+  process.env.GEMINI_API_KEY ?? "AIzaSyD2KZZ0DABLNjZBKhsTfFKO44hINctJx-g";
 if (!somevar) {
   throw new Error("GEMINI_API_KEY is not set in the environment variables.");
 }
@@ -56,8 +56,6 @@ export const updateSessionData = (newMessage: ChatMessage) => {
 
   localStorage.setItem("gemini-session", JSON.stringify(updatedSession));
 };
-
-
 
 export const isValidBase64Image = (imageData: string): boolean => {
   try {
@@ -120,7 +118,7 @@ export const analyzeImage = async (
 
     prompt =
       prompt +
-      "If the question is present return in the format: Question:\n Answer:\n otherwise always return 'No question to solve' if there is any other image other than a question";
+      "If the question is present return in the format: Question:\n Answer:\n (only use markdown and dont use any html tags) otherwise always return 'No question to solve' if there is any other image other than a question";
 
     const result = await model.generateContent([
       prompt,
@@ -176,7 +174,7 @@ export const analyzePrompt = async (prompt: string): Promise<string> => {
       contextualPrompt += "\nNow, for the new query:\n";
     }
 
-    const promptText = contextualPrompt + prompt;
+    const promptText = contextualPrompt + prompt + "(only use markdown and dont use any html tags)";
 
     const result = await model.generateContent([promptText]);
 

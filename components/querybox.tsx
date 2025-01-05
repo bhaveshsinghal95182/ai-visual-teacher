@@ -25,18 +25,18 @@ export const QueryBox: React.FC<QueryBoxProps> = ({ onNewQuery }) => {
 
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto mb-6">
-            <div className="bg-slate-900 rounded-lg p-4 shadow-lg">
+            <div className="bg-white rounded-full p-4 shadow-lg ">
                 <div className="flex items-center">
                     <input
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="flex-grow p-3 rounded-lg bg-slate-800 text-slate-100"
-                        placeholder="Type your query here..."
+                        className="flex-grow p-3 rounded-full bg-green-50 text-slate-100 "
+                        placeholder="Ask a followup..."
                     />
                     <button
                         type="submit"
-                        className="ml-4 px-6 py-2 rounded-lg bg-blue-500 text-white"
+                        className="ml-4 px-6 py-2 rounded-full bg-blue-500 text-white"
                     >
                         Submit
                     </button>

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Camera as CameraIcon, Loader2, RefreshCcw } from 'lucide-react';
 import { analyzeImage } from '../services/gemini';
-import { analyzePrompt } from '../services/gemini-query';
+import { analyzePrompt } from '../services/gemini';
 import { Solution } from './solution';
 import { History } from './convo-history';
 import { QueryBox } from './querybox';
@@ -77,16 +77,14 @@ export function Camera() {
             <div className="flex flex-col gap-4 w-full justify-center sm:flex-row sm:gap-6 sm:w-auto sm:px-4">
                 <button
                     onClick={toggleCamera}
-                    className="inline-flex h-12 items-center justify-center rounded-full border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                >
+                    className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-white bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                     <RefreshCcw className="w-5 h-5" />
                     Toggle Camera
                 </button>
                 <button
                     onClick={() => handleCapture('explain_like_five')}
                     disabled={isSolving}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 justify-center border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                >
+                    className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-white bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                     {isSolving ? (
                         <>
                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -102,8 +100,7 @@ export function Camera() {
                 <button
                     onClick={() => handleCapture('step_by_step')}
                     disabled={isSolving}
-                    className="py-3 rounded-full items-center gap-2 whitespace-nowrap w-full sm:w-auto sm:px-8 disabled:opacity-50 disabled:cursor-not-allowed inline-flex h-12 justify-center border bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 border-slate-800 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                >
+                    className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-white bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                     {isSolving ? (
                         <>
                             <Loader2 className="w-5 h-5 animate-spin" />

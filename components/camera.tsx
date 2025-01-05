@@ -3,7 +3,6 @@ import Webcam from 'react-webcam';
 import { Camera as CameraIcon, Loader2, RefreshCcw } from 'lucide-react';
 import { analyzeImage } from '../services/gemini';
 import { Solution } from './solution';
-import { BackgroundGradient } from './ui/background-gradient';
 
 const WEBCAM_CONFIG = {
     width: 1280,
@@ -105,14 +104,12 @@ export function Camera() {
             )}
 
             {solution && !error && (
-                <BackgroundGradient className="rounded-lg shadow-lg max-w-3xl w-full p-6 overflow-y-auto max-h-[80vh] relative bg-green-50">
-
+                
                     <Solution
                         solution={solution}
                         isSpeaking={isSpeaking}
                         onToggleSpeech={setIsSpeaking}
                     />
-                </BackgroundGradient>
 
             )}
 

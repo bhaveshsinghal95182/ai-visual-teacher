@@ -1,6 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyBxWhvNTqMVfm2Xb4Hb9Kx5m9TqK56pSBY");
+const apiKey = process.env.GEMINI_API_KEY ?? "";
+if (!apiKey) {
+  throw new Error("GEMINI_API_KEY is not set in the environment variables.");
+}
+
+const genAI = new GoogleGenerativeAI(apiKey);
+
 
 export const isValidBase64Image = (imageData: string): boolean => {
   try {

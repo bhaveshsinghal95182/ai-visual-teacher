@@ -2,7 +2,10 @@ import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Camera as CameraIcon, Loader2, RefreshCcw } from 'lucide-react';
 import { analyzeImage } from '../services/gemini';
+import { analyzePrompt } from '@/services/gemini-query';
 import { Solution } from './solution';
+import { History } from './convo-history';
+import { QueryBox } from './querybox';
 
 const WEBCAM_CONFIG = {
     width: 1280,
@@ -32,6 +35,20 @@ export function Camera() {
             setSolution(result);
         } catch (err) {
             setError('Failed to analyze image. Please try again.');
+            console.error(err);
+        } finally {
+            setIsSolving(false);
+        }
+    };
+
+    const handleNewQuery = async (query: string) => {
+        setError('');
+        setIsSolving(true);
+        try {
+            const result = await analyzePrompt(query);
+            setSolution(result);
+        } catch (err) {
+            setError('Failed to process query. Please try again.');
             console.error(err);
         } finally {
             setIsSolving(false);
@@ -98,6 +115,8 @@ export function Camera() {
                 </button>
             </div>
 
+            <QueryBox onNewQuery={handleNewQuery}/>
+
             {error && (
                 <div className="w-full bg-red-50 border border-red-200 rounded-lg p-4">
                     <p className="text-red-600">{error}</p>
@@ -111,6 +130,7 @@ export function Camera() {
                     onToggleSpeech={setIsSpeaking}
                 />
             )}
+            <History />
         </div>
     );
 }

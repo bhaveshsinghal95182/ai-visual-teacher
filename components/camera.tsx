@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Camera as CameraIcon, Loader2, RefreshCcw } from 'lucide-react';
-import { analyzeImage } from '../services/gemini';
-import { analyzePrompt } from '@/services/gemini-query';
+import { analyzeImage, analyzePrompt } from '../services/gemini';
 import { Solution } from './solution';
 import { History } from './convo-history';
 import { QueryBox } from './querybox';
@@ -66,7 +65,12 @@ export function Camera() {
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     className="w-full h-full object-contain"
-                    videoConstraints={{ ...WEBCAM_CONFIG, facingMode }}
+                    videoConstraints={{
+                        ...WEBCAM_CONFIG,
+                        facingMode,
+                        width: window.innerWidth < 640 ? window.innerWidth : WEBCAM_CONFIG.width,
+                        height: window.innerWidth < 640 ? window.innerHeight / 2 : WEBCAM_CONFIG.height,
+                    }}
                 />
             </div>
 

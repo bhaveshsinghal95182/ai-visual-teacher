@@ -158,6 +158,53 @@ export const analyzeImage = async (
   }
 };
 
+export const analyzePrompt = async (prompt: string): Promise<string> => {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const sessionData = getSessionData();
+
+    // Build context from previous interactions
+    let contextualPrompt = "";
+    if (sessionData.messages.length > 0) {
+      contextualPrompt = "Based on our previous conversation:\n";
+      sessionData.messages.slice(-3).forEach((msg) => {
+        if (!msg.imageData) {
+          // Only include text exchanges in context
+          contextualPrompt += `${msg.role}: ${msg.content}\n`;
+        }
+      });
+      contextualPrompt += "\nNow, for the new query:\n";
+    }
+
+    const promptText = contextualPrompt + prompt;
+
+    const result = await model.generateContent([promptText]);
+
+    const response = await result.response;
+    const responseText = response.text();
+
+    // Update session with new interaction
+    updateSessionData({
+      role: "user",
+      content: prompt,
+      timestamp: Date.now(),
+    });
+
+    updateSessionData({
+      role: "assistant",
+      content: responseText,
+      timestamp: Date.now(),
+    });
+
+    return responseText;
+  } catch (error) {
+    console.error("Error analyzing prompt:", error);
+    return error instanceof Error
+      ? `Sorry, I encountered an error: ${error.message}. Please try again.`
+      : "Sorry, I encountered an error while solving the question. Please try again.";
+  }
+};
+
 // Export function to clear session if needed
 export const clearSession = () => {
   if (typeof window !== "undefined") {

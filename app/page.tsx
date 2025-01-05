@@ -5,7 +5,7 @@ import { Camera } from '../components/camera';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 transition-colors">
+    <div className="min-h-screen bg-gradient-to-r bg-zinc-950 transition-colors">
       <header className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
@@ -18,10 +18,10 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-3xl font-bold text-slate-300">
             Answer in Voice or Text Format
           </h2>
-          <p className="mt-4 text-lg text-gray-700">
+          <p className="mt-4 text-lg text-slate-400">
             Show your academic problem to the camera. It will provide you with a solution in voice or text format.
           </p>
         </div>

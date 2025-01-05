@@ -30,22 +30,22 @@ export function Solution({
 
     return (
         
-        <div className="w-full bg-green-50 rounded-lg shadow-lg p-6">
+        <div className="w-full bg-zinc-750 rounded-lg shadow-lg p-6">
             <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold text-black">Solution:</h2>
+                    <h2 className="text-xl font-semibold text-slate-200">Solution:</h2>
                     <button
                         onClick={handleToggleSpeech}
-                        className="p-2 hover:bg-green-100 rounded-full transition-colors"
+                        className="p-2 hover:bg-zinc-500 rounded-full transition-colors"
                         aria-label={isSpeaking ? "Stop speaking" : "Start speaking"}
                     >
                         {isSpeaking ? (
-                            <VolumeX className="w-5 h-5 text-black" />
+                            <VolumeX className="w-5 h-5 text-white" />
                         ) : (
-                            <Volume2 className="w-5 h-5 text-black" />
+                            <Volume2 className="w-5 h-5 text-white" />
                         )}
                     </button>
                 </div>
-                <div className="prose max-w-none text-black">
+                <div className="prose max-w-none text-white">
                     <ReactMarkdown>{solution}</ReactMarkdown>
                 </div>
         </div>

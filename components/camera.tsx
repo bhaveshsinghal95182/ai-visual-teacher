@@ -93,7 +93,7 @@ export function Camera() {
                     ) : (
                         <>
                             <CameraIcon className="w-5 h-5" />
-                            Explain Like 5
+                            Explain Like I am 5
                         </>
                     )}
                 </button>
@@ -116,6 +116,7 @@ export function Camera() {
             </div>
 
             <QueryBox onNewQuery={handleNewQuery} />
+
             <div className="mt-6 sm:mt-0">
                 {error && (
                     <div className="w-full bg-red-50 border border-red-200 rounded-lg p-4">

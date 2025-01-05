@@ -28,7 +28,7 @@ export const History = () => {
 
     return (
         <div className="w-full max-w-4xl mx-auto mb-6">
-            <div className="bg-slate-900 rounded-lg p-4 shadow-lg">
+            <div className="bg-zinc-900 rounded-lg p-4 shadow-lg">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-semibold text-white">Conversation History</h2>
                     <button
@@ -45,11 +45,11 @@ export const History = () => {
                         <div
                             key={index}
                             className={`p-3 rounded-lg ${msg.role === 'user'
-                                    ? 'bg-blue-500/10 text-blue-100'
-                                    : 'bg-slate-800 text-slate-100'
+                                    ? 'bg-green-900 text-white'
+                                    : 'bg-zinc-800 text-white'
                                 }`}
                         >
-                            <div className="text-sm font-medium mb-1 text-slate-400">
+                            <div className="text-sm font-medium mb-1 text-slate-300">
                                 {msg.role === 'user' ? 'You' : 'Assistant'}
                             </div>
                             <div className="text-sm">
@@ -59,7 +59,7 @@ export const History = () => {
                                     msg.content
                                 )}
                             </div>
-                            <div className="text-xs text-slate-500 mt-1">
+                            <div className="text-xs text-slate-300 mt-1">
                                 {new Date(msg.timestamp).toLocaleTimeString()}
                             </div>
                         </div>

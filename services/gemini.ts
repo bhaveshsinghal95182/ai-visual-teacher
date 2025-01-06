@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 const somevar =
-  process.env.GEMINI_API_KEY ?? "AIzaSyBb_PSGglocQ_7v_JIo-hPQ6uT0bAYrbes";
+  process.env.GEMINI_API_KEY ?? "";
 if (!somevar) {
   throw new Error("GEMINI_API_KEY is not set in the environment variables.");
 }

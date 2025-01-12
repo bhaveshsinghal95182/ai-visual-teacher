@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 const somevar =
-  process.env.GEMINI_API_KEY ?? "";
+  process.env.GEMINI_API_KEY ?? "AIzaSyBb_PSGglocQ_7v_JIo-hPQ6uT0bAYrbes";
 if (!somevar) {
   throw new Error("GEMINI_API_KEY is not set in the environment variables.");
 }
@@ -26,7 +26,8 @@ type SessionData = {
 // Session management functions
 const getSessionData = (): SessionData => {
   if (typeof window === "undefined")
-    return { messages: [], lastActive: Date.now() };
+    return { messages: [], lastActive: Date.now() 
+  };
 
   const stored = localStorage.getItem("gemini-session");
   if (!stored) {
